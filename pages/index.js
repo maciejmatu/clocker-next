@@ -5,11 +5,18 @@ import {
   TimeDisplayComponent,
   fetchTime
 } from "../components/TimeComponent";
+import Head from "next/head";
 import "../styles/index.css";
 
 export default function IndexPage({ timezones }) {
   return (
     <div className="App">
+      <Head>
+        <meta
+          name="google-site-verification"
+          content="lpeIiRCuiBhXLNtHGOGsZc45A-ZGTnxYC-9dsnDMnds"
+        />
+      </Head>
       <header className="App-header">
         {timezones.map(({ timezone, datetime }) => (
           <TimeDisplayComponent
