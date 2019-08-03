@@ -19,8 +19,8 @@ export default function IndexPage({ timezones }) {
           />
         ))}
         <TimeComponent delay={2000} location="Pacific/Palau" />
-        <TimeComponent delay={7000} location="America/New_York" />
-        <TimeComponent delay={17000} location="Australia/Melbourne" />
+        <TimeComponent delay={5000} location="America/New_York" />
+        <TimeComponent delay={9000} location="Australia/Melbourne" />
       </header>
     </div>
   );
