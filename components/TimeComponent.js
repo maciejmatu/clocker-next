@@ -47,6 +47,8 @@ export function TimeComponent({ delay = 100, location = "Europe/Berlin" }) {
 
 export async function fetchTime(delay, location) {
   return fetch(
-    `http://slowwly.robertomurray.co.uk/delay/${delay}/url/http://worldtimeapi.org/api/timezone/${location}`
+    `${
+      process.env.absoluteUrl
+    }/api/time?delay=${delay}&location=${encodeURIComponent(location)}`
   ).then(res => res.json());
 }
