@@ -6,7 +6,10 @@ import {
   fetchTime
 } from "../components/TimeComponent";
 import Head from "next/head";
+import { setupErrorLogger } from "../components/setupErrorLogger";
 import "../styles/index.css";
+
+setupErrorLogger();
 
 export default function IndexPage({ timezones }) {
   return (
@@ -35,10 +38,11 @@ export default function IndexPage({ timezones }) {
 
 IndexPage.getInitialProps = async () => {
   const timezones = await Promise.all([
-    fetchTime(100, "Europe/Berlin"),
-    fetchTime(500, "Europe/Lisbon"),
-    fetchTime(1000, "Asia/Brunei"),
-    fetchTime(3000, "Asia/Tokyo")
+    // fail silently on backend errors
+    fetchTime(100, "Europe/Berlin").catch(() => ({})),
+    fetchTime(500, "Europe/Lisbon").catch(() => ({})),
+    fetchTime(1000, "Asia/Brunei").catch(() => ({})),
+    fetchTime(3000, "Asia/Tokyo").catch(() => ({}))
   ]);
 
   return {

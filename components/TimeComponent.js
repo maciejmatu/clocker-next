@@ -1,5 +1,6 @@
 import "isomorphic-unfetch";
 import React from "react";
+import { reportError } from "./setupErrorLogger";
 
 export function TimeDisplayComponent({
   location = "Europe/Berlin",
@@ -30,10 +31,12 @@ export function TimeComponent({ delay = 100, location = "Europe/Berlin" }) {
   React.useEffect(() => {
     setLoadingTime(true);
 
-    fetchTime(delay, location).then(data => {
-      setLoadingTime(false);
-      setTimeData(data);
-    });
+    fetchTime(delay, location)
+      .then(data => {
+        setLoadingTime(false);
+        setTimeData(data);
+      })
+      .catch(reportError);
   }, [delay, location]);
 
   return (
@@ -50,5 +53,11 @@ export async function fetchTime(delay, location) {
     `${
       process.env.absoluteUrl
     }/api/time?delay=${delay}&location=${encodeURIComponent(location)}`
-  ).then(res => res.json());
+  ).then(res => {
+    if (res.ok) {
+      return res.json();
+    } else {
+      throw new Error(res.statusText);
+    }
+  });
 }
