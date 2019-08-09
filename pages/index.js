@@ -19,6 +19,7 @@ export default function IndexPage({ timezones }) {
           name="google-site-verification"
           content="lpeIiRCuiBhXLNtHGOGsZc45A-ZGTnxYC-9dsnDMnds"
         />
+        <meta name="msvalidate.01" content="7B6AA9F5A8F1938FDBC8F0BED0790FB1" />
       </Head>
       <header className="App-header">
         {timezones.map(({ timezone, datetime }) => (
